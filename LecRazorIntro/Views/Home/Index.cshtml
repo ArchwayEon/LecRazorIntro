@@ -1,8 +1,96 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+   ViewData["Title"] = "CSCI3110 Introduction to Razor";
+   Layout = "~/Views/Shared/_Layout.cshtml";
+   //Layout = null;
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+
+<h1 class="display-4">@ViewData["Title"]</h1>
+<p>
+   Razor code provides a simple programming syntax for writing server-side code in web pages.
+   It uses the C# programming language and makes use of the @@ symbol
+</p>
+
+<h2>Server-side Comments</h2>
+<!-- This is a client-side comment -->
+@* This is a server-side comment *@
+<h2>Code Block</h2>
+@{
+   string greet = "hello";
+   char gender = 'M';
+   double val = 12.3;
+
+   val = val * 100;
+}
+<h2>Inline Expression</h2>
+<p>@greet @gender @val</p>
+<p>@greet Jeff.  You are @gender. Value is @val.</p>
+
+<h2>Code and Markup</h2>
+@if (gender == 'M')
+{
+   <h3>Male</h3>
+}
+else
+{
+   <h3>Female</h3>
+}
+
+@for (int i = 2; i <= 40; i += 2)
+{
+   <span>@i</span>
+}
+@{
+   string[] names = { "Jeff", "Evelyn", "Darien", "Dana", "Dylan" };
+}
+<ul>
+   @foreach (var n in names)
+   {
+      <li>@n</li>
+   }
+</ul>
+@{
+   var foo = true;
+   var bar = "some value";
+}
+
+@if (foo)
+{
+   @* Plain Text  ERROR! *@
+}
+
+@if (foo)
+{
+   <text>Plain Text</text>
+}
+<br />
+@if (foo)
+{
+   @:Plain Text and @bar
+}
+
+<h2>Explicit Expressions</h2>
+345 * 67 % 34 = @(345 * 67 % 34)
+<br />
+@@ was escaped
+
+<h2>ViewData and ViewBag</h2>
+From ViewData:
+<p>@ViewData["SomeValue1"] @ViewBag.SomeValue1</p>
+From ViewBag:
+<p>@ViewData["SomeValue2"] @ViewBag.SomeValue2</p>
+
+<h2>RenderSectionAsync</h2>
+@section Before{
+   Something to render before
+}
+@section After{
+   Something to render after
+}
+
+<h2>Partial View</h2>
+<partial name="_MyPartialView" />
+
+<h2>View Component</h2>
+@await Component.InvokeAsync("Time")
+

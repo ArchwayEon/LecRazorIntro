@@ -20,6 +20,13 @@ namespace LecRazorIntro.Controllers
 
       public IActionResult Index()
       {
+         ViewData["SomeValue1"] = "From the controller 1";
+         ViewBag.SomeValue2 = "From the controller 2";
+         return View();
+      }
+
+      public IActionResult Person()
+      {
          return View();
       }
 
